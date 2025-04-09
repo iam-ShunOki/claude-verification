@@ -7,11 +7,11 @@ class Character:
 
 class Player(Character):
     def __init__(self, health):
-        self.health = health
+        super().__init__(health)
 
 class Enemy(Character):
     def __init__(self, health):
-        self.health = health
+        super().__init__(health)
 
 INITIAL_HEALTH = 100
 MIN_ATTACK = 5
@@ -26,7 +26,7 @@ def fight_encounter():
     print("恐ろしい敵が姿を現しました！敵の体力は {} です。".format(enemy.health))
     
     while enemy.health > 0 and player.health > 0:
-        input_key = input("攻撃するには Enter キーを押してください... ディフェンスするには 'd' キーを押してください。")
+        input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
         if input_key == "d":
             defend_attack(enemy, player)
         elif input_key == "a":
