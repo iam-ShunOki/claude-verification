@@ -27,6 +27,8 @@ def fight_encounter():
     
     while enemy.health > 0 and player.health > 0:
         input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
+        # インプットデータを小文字に変換
+        input_key = input_key.lower()
         if input_key == "d":
             defend_attack(enemy, player)
         elif input_key == "a":
@@ -45,12 +47,12 @@ def attack_enemy(enemy, player):
     print("敵を攻撃します。")
     enemy.health -= player_attack
     print("敵に {} のダメージを与えました。".format(player_attack))
-    print("敵の残り体力は {} です。".format(enemy.health))
+    print("敵の残り体力は {} です。".format(enemy.health if enemy.health > 0 else 0))
     enemy_attack = random.randint(MIN_ATTACK, MAX_ATTACK)
     print("敵が攻撃します。")
     player.health -= enemy_attack
     print("あなたは {} のダメージを受けました。".format(enemy_attack))
-    print("あなたの残り体力は {} です。".format(player.health))
+    print("あなたの残り体力は {} です。".format(player.health if player.health > 0 else 0))
 def defend_attack(enemy, player):
     print("敵の攻撃を防御しました。")
     print("あなたの残り体力は {} です。".format(player.health))
@@ -62,6 +64,8 @@ def judge_battle_result(player, enemy):
         return True
     elif player.health <= 0:
         print("あなたは倒されました。冒険はここで終わりです。")
+        return True
+    else:
         return False
 
 if __name__ == "__main__":
