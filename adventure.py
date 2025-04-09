@@ -26,7 +26,7 @@ def fight_encounter():
     print("恐ろしい敵が姿を現しました！敵の体力は {} です。".format(enemy.health))
     
     while enemy.health > 0 and player.health > 0:
-        input_key = input("攻撃するには Enter キーを押してください... ディフェンスするには 'd' キーを押してください。")
+        input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
         if input_key == "d":
             defend_attack(enemy, player)
         elif input_key == "a":
@@ -36,7 +36,8 @@ def fight_encounter():
         
         print("-" * 40)
 
-        judge_battle_result(enemy, player)
+        if judge_battle_result(enemy, player):
+            break
     
     print("ゲーム終了。")
 
@@ -58,8 +59,13 @@ def defend_attack(enemy, player):
 def judge_battle_result(enemy, player):
     if enemy.health <= 0:
         print("敵は完全に倒されました！")
+        print("あなたは勝利しました！")
+        return True
     elif player.health <= 0:
         print("あなたは倒されました。冒険はここで終わりです。")
+        return True
+    else:
+        return False
 
 if __name__ == "__main__":
     fight_encounter()
