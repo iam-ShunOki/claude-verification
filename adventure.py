@@ -1,13 +1,17 @@
 import random
 import sys
 
-class Player:
+class Character:
     def __init__(self, health):
         self.health = health
 
-class Enemy:
+class Player(Character):
     def __init__(self, health):
-        self.health = health
+        super().__init__(health)
+
+class Enemy(Character):
+    def __init__(self, health):
+        super().__init__(health)
 
 INITIAL_HEALTH = 100
 MIN_ATTACK = 5
