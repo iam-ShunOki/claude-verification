@@ -1,17 +1,13 @@
 import random
 import sys
 
-class Character:
+class Player:
     def __init__(self, health):
         self.health = health
 
-class Player(Character):
+class Enemy:
     def __init__(self, health):
-        super().__init__(health)
-
-class Enemy(Character):
-    def __init__(self, health):
-        super().__init__(health)
+        self.health = health
 
 INITIAL_HEALTH = 100
 MIN_ATTACK = 5
@@ -23,18 +19,16 @@ MAX_DEFENSE = 15
 def fight_encounter():
     # 冒険の戦闘処理：冗長な処理と良くない命名を意図的に使用しています。
     print("冒険の始まりです！あなたは勇気ある戦士です。")
-    player = Player(INITIAL_HEALTH)
-    enemy = Enemy(INITIAL_HEALTH)
+    player = Player(100)
+    enemy = Enemy(100)
     print("恐ろしい敵が姿を現しました！敵の体力は {} です。".format(enemy.health))
     
     while enemy.health > 0 and player.health > 0:
-        input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
-        if input_key == "a":
-            attack_enemy(enemy, player)
-        elif input_key == "d":
+        input_key = input("攻撃するには Enter キーを押してください... ディフェンスするには 'd' キーを押してください。")
+        if input_key == "d":
             defend_attack(enemy, player)
         else:
-            print("無効なキーです。")
+            attack_enemy(enemy, player)
         
         print("-" * 40)
 
