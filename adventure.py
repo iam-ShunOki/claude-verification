@@ -39,7 +39,8 @@ def fight_encounter():
         
         print("-" * 40)
 
-        judge_battle_result(player, enemy)
+        if judge_battle_result(player, enemy):
+            break
     
     print("ゲーム終了。")
 
@@ -70,8 +71,13 @@ def defend_attack(enemy, player):
 def judge_battle_result(player, enemy):
     if enemy.health <= 0:
         print("敵は完全に倒されました！")
+        print("あなたは勝利しました！")
+        return True
     elif player.health <= 0:
         print("あなたは倒されました。冒険はここで終わりです。")
+        return True
+    else:
+        return False
 
 if __name__ == "__main__":
     fight_encounter()
