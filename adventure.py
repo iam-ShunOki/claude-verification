@@ -19,8 +19,6 @@ class Enemy(Character):
 INITIAL_HEALTH = 100
 MIN_ATTACK = 5
 MAX_ATTACK = 20
-MIN_DEFENSE = 0
-MAX_DEFENSE = 15
 
 
 def fight_encounter():
