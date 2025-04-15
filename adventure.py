@@ -1,13 +1,17 @@
 import random
 import sys
 
-class Player:
+class Character:
     def __init__(self, health):
         self.health = health
 
-class Enemy:
+class Player(Character):
     def __init__(self, health):
-        self.health = health
+        super().__init__(health)
+
+class Enemy(Character):
+    def __init__(self, health):
+        super().__init__(health)
 
 INITIAL_HEALTH = 100
 MIN_ATTACK = 5
@@ -22,15 +26,20 @@ def fight_encounter():
     print("恐ろしい敵が姿を現しました！敵の体力は {} です。".format(enemy.health))
     
     while enemy.health > 0 and player.health > 0:
-        input_key = input("攻撃するには Enter キーを押してください... ディフェンスするには 'd' キーを押してください。")
-        if input_key == "d":
-            defend_attack(enemy, player)
-        else:
-            attack_enemy(enemy, player)
+        try:
+            input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
+            if input_key == "d":
+                defend_attack(enemy, player)
+            elif input_key == "a":
+                attack_enemy(enemy, player)
+        except KeyboardInterrupt:
+            print("ゲームを中断します。")
+            sys.exit(0)
         
         print("-" * 40)
 
-        judge_battle_result(player, enemy)
+        if judge_battle_result(player, enemy):
+            break
     
     print("ゲーム終了。")
 
@@ -59,8 +68,13 @@ def defend_attack(enemy, player):
 def judge_battle_result(player, enemy):
     if enemy.health <= 0:
         print("敵は完全に倒されました！")
+        print("あなたは勝利しました！")
+        return True
     elif player.health <= 0:
         print("あなたは倒されました。冒険はここで終わりです。")
+        return True
+    else:
+        return False
     """
     戦闘の結果を判定する処理
     """
