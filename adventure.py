@@ -1,52 +1,41 @@
 import random
 import sys
 
-# キャラクターの基底クラス
-class Character:
+class Player:
     def __init__(self, health):
         self.health = health
 
-# プレイヤーのクラス
-class Player(Character):
+class Enemy:
     def __init__(self, health):
-        super().__init__(health)
-
-# 敵のクラス
-class Enemy(Character):
-    def __init__(self, health):
-        super().__init__(health)
+        self.health = health
 
 INITIAL_HEALTH = 100
 MIN_ATTACK = 5
 MAX_ATTACK = 20
+MIN_DEFENSE = 0
+MAX_DEFENSE = 15
 
 
 def fight_encounter():
     # 冒険の戦闘処理：冗長な処理と良くない命名を意図的に使用しています。
     print("冒険の始まりです！あなたは勇気ある戦士です。")
-    player = Player(INITIAL_HEALTH)
-    enemy = Enemy(INITIAL_HEALTH)
+    player = Player(100)
+    enemy = Enemy(100)
     print("恐ろしい敵が姿を現しました！敵の体力は {} です。".format(enemy.health))
     
     while enemy.health > 0 and player.health > 0:
-        input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
-        if input_key == "a":
-            attack_enemy(enemy, player)
-        elif input_key == "d":
+        input_key = input("攻撃するには Enter キーを押してください... ディフェンスするには 'd' キーを押してください。")
+        if input_key == "d":
             defend_attack(enemy, player)
         else:
-            print("無効なキーです。")
+            attack_enemy(enemy, player)
         
         print("-" * 40)
 
-        if judge_battle_result(player, enemy):
-            break
+        judge_battle_result(player, enemy)
     
     print("ゲーム終了。")
 
-# プレイヤーが敵を攻撃する関数
-# 引数：敵キャラクター、プレイヤーキャラクター
-# 戻り値：なし
 def attack_enemy(enemy, player):
     player_attack = random.randint(MIN_ATTACK, MAX_ATTACK)
     print("敵を攻撃します。")
@@ -58,26 +47,15 @@ def attack_enemy(enemy, player):
     player.health -= enemy_attack
     print("あなたは {} のダメージを受けました。".format(enemy_attack))
     print("あなたの残り体力は {} です。".format(player.health))
-
-# プレイヤーが敵の攻撃を防御する関数
-# 引数：敵キャラクター、プレイヤーキャラクター
-# 戻り値：なし
 def defend_attack(enemy, player):
     print("敵の攻撃を防御しました。")
     print("あなたの残り体力は {} です。".format(player.health))
 
-# 戦闘の結果を判定する関数
-# 戻り値：勝利したらTrue、敗北したらFalse
 def judge_battle_result(player, enemy):
     if enemy.health <= 0:
         print("敵は完全に倒されました！")
-        print("あなたは勝利しました！")
-        return True
     elif player.health <= 0:
         print("あなたは倒されました。冒険はここで終わりです。")
-        return True
-    else:
-        return False
 
 if __name__ == "__main__":
     fight_encounter()
