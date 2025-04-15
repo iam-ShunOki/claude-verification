@@ -30,7 +30,7 @@ def fight_encounter():
     while enemy.health > 0 and player.health > 0:
         try:
             input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
-        if input_key == "d":
+            if input_key == "d":
                 defend_attack(enemy, player)
             else:
                 attack_enemy(enemy, player)
