@@ -30,8 +30,10 @@ def fight_encounter():
             input_key = input("攻撃するには 'a' キーを押してください... ディフェンスするには 'd' キーを押してください。")
             if input_key == "d":
                 defend_attack(enemy, player)
-            else:
+            elif input_key == "a":
                 attack_enemy(enemy, player)
+            else:
+                print("無効なキーです。")
         except KeyboardInterrupt:
             print("ゲームを中断します。")
             sys.exit(0)
