@@ -19,8 +19,8 @@ MAX_DEFENSE = 15
 def fight_encounter():
     # 冒険の戦闘処理：冗長な処理と良くない命名を意図的に使用しています。
     print("冒険の始まりです！あなたは勇気ある戦士です。")
-    player = Player(INITIAL_HEALTH)
-    enemy = Enemy(INITIAL_HEALTH)
+    player = Player(100)
+    enemy = Enemy(100)
     print("恐ろしい敵が姿を現しました！敵の体力は {} です。".format(enemy.health))
     
     while enemy.health > 0 and player.health > 0:
@@ -32,8 +32,7 @@ def fight_encounter():
         
         print("-" * 40)
 
-        if judge_battle_result(player, enemy):
-            break
+        judge_battle_result(player, enemy)
     
     print("ゲーム終了。")
 
@@ -55,13 +54,8 @@ def defend_attack(enemy, player):
 def judge_battle_result(player, enemy):
     if enemy.health <= 0:
         print("敵は完全に倒されました！")
-        print("あなたは勝利しました！")
-        return True
     elif player.health <= 0:
         print("あなたは倒されました。冒険はここで終わりです。")
-        return True
-    else:
-        return False
 
 if __name__ == "__main__":
     fight_encounter()
