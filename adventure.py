@@ -12,15 +12,13 @@ class Enemy:
 INITIAL_HEALTH = 100
 MIN_ATTACK = 5
 MAX_ATTACK = 20
-MIN_DEFENSE = 0
-MAX_DEFENSE = 15
 
 
 def fight_encounter():
     # 冒険の戦闘処理：冗長な処理と良くない命名を意図的に使用しています。
     print("冒険の始まりです！あなたは勇気ある戦士です。")
-    player = Player(100)
-    enemy = Enemy(100)
+    player = Player(INITIAL_HEALTH)
+    enemy = Enemy(INITIAL_HEALTH)
     print("恐ろしい敵が姿を現しました！敵の体力は {} です。".format(enemy.health))
     
     while enemy.health > 0 and player.health > 0:
@@ -36,6 +34,9 @@ def fight_encounter():
     
     print("ゲーム終了。")
 
+"""
+敵を攻撃する処理
+"""
 def attack_enemy(enemy, player):
     player_attack = random.randint(MIN_ATTACK, MAX_ATTACK)
     print("敵を攻撃します。")
@@ -47,10 +48,17 @@ def attack_enemy(enemy, player):
     player.health -= enemy_attack
     print("あなたは {} のダメージを受けました。".format(enemy_attack))
     print("あなたの残り体力は {} です。".format(player.health))
+
+"""
+敵の攻撃を防御する処理
+"""
 def defend_attack(enemy, player):
     print("敵の攻撃を防御しました。")
     print("あなたの残り体力は {} です。".format(player.health))
 
+"""
+戦闘の結果を判定する処理
+"""
 def judge_battle_result(player, enemy):
     if enemy.health <= 0:
         print("敵は完全に倒されました！")
