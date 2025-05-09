@@ -1,0 +1,27 @@
+{
+    "name": "claude-verification-container",
+    "image": "node:20",
+    "forwardPorts": [
+        3000
+    ],
+    "containerEnv": {
+        "NODE_ENV": "development"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "ms-python.python",
+                "ms-azuretools.vscode-docker"
+            ],
+            "settings": { 
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
+    },
+    "postStartCommand": "npm install && npm list --depth=0",
+    "remoteUser": "node"
+
+}
+// No newline at end of file
