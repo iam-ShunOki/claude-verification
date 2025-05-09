@@ -1,0 +1,15 @@
+{
+    "name": "claude-verification-container",
+    "image": "node:20",
+    "vscode": {
+        "extensions": [
+            "esbenp.prettier-vscode",
+            "dbaeumer.vscode-eslint",
+            "ms-python.python"
+        ],
+        "settings": { 
+            "terminal.intergrated.shell.linux": "/bin/bash"
+        }
+    },
+    "postStartCommand": "npm install"
+}
