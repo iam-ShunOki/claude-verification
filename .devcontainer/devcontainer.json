@@ -1,6 +1,12 @@
 {
     "name": "claude-verification-container",
     "image": "node:20",
+    "forwardPorts": [
+        3000
+    ],
+    "containerEnv": {
+        "NODE_ENV": "development"
+    },
     "customizations": {
         "vscode": {
             "extensions": [
@@ -14,5 +20,5 @@
             }
         }
     },
-    "postStartCommand": "npm install"
-}
+    "postStartCommand": "npm install && npm list --depth=0"
+} // No newline at end of file
