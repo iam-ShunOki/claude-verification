@@ -1,0 +1,14 @@
+services:
+  workspace:
+    image: mcr.microsoft.com/vscode/devcontainers/javascript-node:20-bullseye
+    init: true
+    command: /bin/sh -c "mkdir -p /home/node/dev; while sleep 1000; do :; done"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ..:/home/node/dev:cached
+      - ~/.ssh:/home/node/.ssh
+    working_dir: /home/node/dev
+
+volumes:
+  frontend-node-modules:
