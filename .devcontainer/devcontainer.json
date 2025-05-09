@@ -20,6 +20,8 @@
             }
         }
     },
-    "postStartCommand": "npm install && npm list --depth=0"
-} 
+    "postStartCommand": "npm install && npm list --depth=0",
+    "remoteUser": "node"
+
+}
 // No newline at end of file
