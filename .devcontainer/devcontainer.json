@@ -26,6 +26,6 @@
       }
     },
     "workspaceFolder": "/home/node/dev",
-    "forwardPorts": [3000],
+    "forwardPorts": [3001],
     "remoteUser": "node"
   }

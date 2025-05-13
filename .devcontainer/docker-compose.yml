@@ -1,14 +1,18 @@
 services:
   workspace:
+    # node:20-bullseye
     image: mcr.microsoft.com/vscode/devcontainers/javascript-node:20-bullseye
+    # init: コンテナの起動時に実行されるコマンド
     init: true
-    command: /bin/sh -c "mkdir -p /home/node/dev; while sleep 1000; do :; done"
+    # command: コンテナの起動時に実行されるコマンド
+    command: /bin/sh -c "mkdir -p /home/node/dev; tail -f /dev/null"
+    # extra_hosts: コンテナのホスト名を追加
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    # volumes: ホストのディレクトリをコンテナにマウント
     volumes:
       - ..:/home/node/dev:cached
-      - ~/.ssh:/home/node/.ssh
+      - ~/.ssh/id_rsa.pub:/home/node/.ssh/id_rsa.pub:ro
+      - ~/.ssh/id_rsa:/home/node/.ssh/id_rsa:ro
+    # working_dir: コンテナの作業ディレクトリ
     working_dir: /home/node/dev
-
-volumes:
-  frontend-node-modules:
