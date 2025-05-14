@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { BookList } from "./components/BookList";
 import { SearchBar } from "./components/SearchBar";
@@ -8,16 +8,15 @@ import type { Book, Genre } from "./types/book";
 
 function App() {
   const [filteredBooks, setFilteredBooks] = useState<Book[]>(mockBooks);
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState<Genre | "">("");
+  const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
 
-  const handleSearch = (
-    keyword: string,
-    genre: Genre | "",
-    isAvailable: boolean | null
-  ) => {
+  useEffect(() => {
     let filtered = mockBooks;
 
-    if (keyword) {
-      const lowerKeyword = keyword.toLowerCase();
+    if (searchKeyword) {
+      const lowerKeyword = searchKeyword.toLowerCase();
       filtered = filtered.filter(
         (book) =>
           book.title.toLowerCase().includes(lowerKeyword) ||
@@ -25,8 +24,8 @@ function App() {
       );
     }
 
-    if (genre) {
-      filtered = filtered.filter((book) => book.genre === genre);
+    if (selectedGenre) {
+      filtered = filtered.filter((book) => book.genre === selectedGenre);
     }
 
     if (isAvailable !== null) {
@@ -34,6 +33,16 @@ function App() {
     }
 
     setFilteredBooks(filtered);
+  }, [searchKeyword, selectedGenre, isAvailable]);
+
+  const handleSearch = (
+    keyword: string,
+    genre: Genre | "",
+    available: boolean | null
+  ) => {
+    setSearchKeyword(keyword);
+    setSelectedGenre(genre);
+    setIsAvailable(available);
   };
 
   return (

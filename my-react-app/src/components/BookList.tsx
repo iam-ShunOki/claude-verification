@@ -5,6 +5,14 @@ interface BookListProps {
 }
 
 export const BookList = ({ books }: BookListProps) => {
+  if (books.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <p className="text-gray-500 text-lg">書籍が見つかりませんでした。</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       {books.map((book) => (
